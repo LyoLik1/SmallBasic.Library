@@ -30,14 +30,14 @@ namespace ConsoleApp5
                 Shapes.Move(S, x, y);
                 x += stepx;
                 y += stepy;
-                if (x >= GraphicsWindow.Width-20)
+                if (x >= GraphicsWindow.Width - 20)
                 {
                     stepx = -stepx;
                 }
                 //if (y >= GraphicsWindow.Height - 20)
                 //{
                 //    stepy = -stepy;
-               // }
+                // }
                 if (x < 0)
                 {
                     stepx = -stepx;
@@ -47,12 +47,18 @@ namespace ConsoleApp5
                     stepy = -stepy;
                 }
                 var mx = GraphicsWindow.MouseX;
-                var my = GraphicsWindow.MouseY;
-                if (((x >= mx - 50) || (x <= mx + 50)) && (y >= my - 10))
+                var my = GraphicsWindow.Height - 40;
+                if (((x >= mx - 50) && (x <= mx + 50)) && (y >= my))
                 {
                     stepy = -stepy;
                 }
+                if (y > GraphicsWindow.Height)
+                {
+                    Sound.PlayAndWait (" рингтон Sad trombone - Грустный тромбон.mp3");
+                    Microsoft.SmallBasic.Library.Program.End();
 
+                }
+                
             };
         }
     }
