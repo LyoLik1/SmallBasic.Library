@@ -11,6 +11,7 @@ namespace ConsoleApp5
     {
         static void Main(string[] args)
         {
+            Primitive[] enemies = new Primitive[10];
             GraphicsWindow.Show();
             var P = Shapes.AddRectangle(100, 20);
             Shapes.Move(P, 0, GraphicsWindow.Height - 20);
@@ -18,13 +19,21 @@ namespace ConsoleApp5
             {
                 Shapes.Move(P, GraphicsWindow.MouseX - 50, GraphicsWindow.Height - 20);
             };
+            GraphicsWindow.BrushColor = "yellow";
             var S = Shapes.AddEllipse(20, 20);
             int x = 2;
             int y = 2;
             int stepx = 2;
             int stepy = 2;
+            Mouse.HideCursor();
+            var F=GraphicsWindow.Width /10;
+            for(int f=0; f<10; f++)
+            {
+               enemies[f]=Shapes.AddRectangle(F,20);
+                Shapes.Move(enemies[f], f * (F), 0);
+            }
 
-            Timer.Interval = 10;
+            Timer.Interval = 1;
             Timer.Tick += () =>
             {
                 Shapes.Move(S, x, y);
@@ -52,10 +61,19 @@ namespace ConsoleApp5
                 {
                     stepy = -stepy;
                 }
+
+                if ((x = Shapes.GetLeft(enemies[S])) && (y==Shapes.GetTop( enemies[P])))
+                {
+
+
+                }
+
+
                 if (y > GraphicsWindow.Height)
                 {
-                    Sound.PlayAndWait (" рингтон Sad trombone - Грустный тромбон.mp3");
+                    // Sound.PlayAndWait(" рингтон Sad trombone - Грустный тромбон.mp3");
                     Microsoft.SmallBasic.Library.Program.End();
+                   
 
                 }
                 
